@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/displayEventsFragment">
+
+    <fragment
+        android:id="@+id/displayEventsFragment"
+        android:name="com.example.finalproject.DisplayEventsFragment"
+        android:label="fragment_display_events"
+        tools:layout="@layout/fragment_display_events" >
+        <action
+            android:id="@+id/action_displayEventsFragment_to_createPersonFragment"
+            app:destination="@id/createPersonFragment" />
+        <action
+            android:id="@+id/action_displayEventsFragment_to_createEvent"
+            app:destination="@id/createEvent" />
+        <action
+            android:id="@+id/action_displayEventsFragment_to_viewEventFragment"
+            app:destination="@id/viewEventFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPersonFragment"
+        android:name="com.example.finalproject.CreatePersonFragment"
+        android:label="CreatePersonFragment" />
+    <fragment
+        android:id="@+id/createEvent"
+        android:name="com.example.finalproject.CreateEvent"
+        android:label="fragment_create_event"
+        tools:layout="@layout/fragment_create_event" >
+        <action
+            android:id="@+id/action_createEvent_to_pickPersonFragment"
+            app:destination="@id/pickPersonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pickPersonFragment"
+        android:name="com.example.finalproject.PickPersonFragment"
+        android:label="fragment_pick_person"
+        tools:layout="@layout/fragment_pick_person" />
+    <fragment
+        android:id="@+id/viewEventFragment"
+        android:name="com.example.finalproject.ViewEventFragment"
+        android:label="fragment_view_event"
+        tools:layout="@layout/fragment_view_event" >
+        <action
+            android:id="@+id/action_viewEventFragment_to_viewPersonFragment"
+            app:destination="@id/viewPersonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPersonFragment"
+        android:name="com.example.finalproject.ViewPersonFragment"
+        android:label="fragment_view_person"
+        tools:layout="@layout/fragment_view_person" />
+</navigation>

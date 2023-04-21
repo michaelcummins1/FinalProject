@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Date"
-            android:textColor="@color/blue"
+            android:textColor="@color/navy"
             android:textSize="35sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eventName" />
@@ -45,8 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="People:"
-            android:textColor="@color/blue"
-            android:textSize="30dp"
+            android:textColor="@color/navy"
+            android:textSize="35sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eventDate" />
 
