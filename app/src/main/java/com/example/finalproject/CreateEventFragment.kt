@@ -5,20 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.finalproject.databinding.FragmentCreatePersonBinding
-import com.example.finalproject.databinding.FragmentDisplayEventsBinding
-import com.example.finalproject.databinding.FragmentPickPersonBinding
+import com.example.finalproject.databinding.FragmentCreateEventBinding
 
-class PickPersonFragment : Fragment() {
+class CreateEventFragment : Fragment() {
 
-    private var _binding: FragmentPickPersonBinding? = null
+    private var _binding: FragmentCreateEventBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentPickPersonBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateEventBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
         return rootView
