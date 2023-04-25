@@ -1,9 +1,10 @@
 package com.example.finalproject
 
+import androidx.lifecycle.ViewModel
 import java.text.DateFormat
 import java.util.*
 
-class EventViewModel {
+class EventViewModel : ViewModel() {
 
     val eventList: MutableList<Event> = mutableListOf()
 

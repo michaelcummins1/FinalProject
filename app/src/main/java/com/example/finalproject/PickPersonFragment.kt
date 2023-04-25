@@ -8,11 +8,15 @@ import android.view.ViewGroup
 import com.example.finalproject.databinding.FragmentCreatePersonBinding
 import com.example.finalproject.databinding.FragmentDisplayEventsBinding
 import com.example.finalproject.databinding.FragmentPickPersonBinding
+import androidx.fragment.app.activityViewModels
+
 
 class PickPersonFragment : Fragment() {
 
     private var _binding: FragmentPickPersonBinding? = null
     private val binding get() = _binding!!
+
+    val viewModel: EventViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
