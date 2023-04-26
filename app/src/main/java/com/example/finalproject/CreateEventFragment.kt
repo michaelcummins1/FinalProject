@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.example.finalproject.databinding.FragmentCreateEventBinding
 
 class CreateEventFragment : Fragment() {
@@ -27,7 +28,7 @@ class CreateEventFragment : Fragment() {
 
         val myOnClickListener: View.OnClickListener = View.OnClickListener { view ->
             when(view.id){
-                R.id.add_person -> R.id.action_createEvent_to_pickPersonFragment
+                R.id.add_person ->  rootView.findNavController().navigate(R.id.action_createEvent_to_pickPersonFragment)
             }
         }
 

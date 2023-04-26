@@ -8,7 +8,7 @@ class EventViewModel : ViewModel() {
 
     val eventList: MutableList<Event> = mutableListOf()
 
-    private val personList: MutableList<Person> = mutableListOf()
+    val personList: MutableList<Person> = mutableListOf()
 
 
     fun createNewPerson(name: String, giftIdeas: String){

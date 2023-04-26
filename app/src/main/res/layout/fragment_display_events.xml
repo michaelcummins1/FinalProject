@@ -14,6 +14,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/person_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +49,29 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:text="New Person"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/clear_people_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/event_button" />
+
+    <Button
+        android:id="@+id/clear_events_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear Events"
+        app:layout_constraintBaseline_toBaselineOf="@+id/clear_people_button"
+        app:layout_constraintEnd_toStartOf="@+id/clear_people_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/clear_people_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="Clear People"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clear_events_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

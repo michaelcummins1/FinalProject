@@ -42,11 +42,19 @@ class DisplayEventsFragment : Fragment() {
                 R.id.event_button -> {
                     rootView.findNavController().navigate(R.id.action_displayEventsFragment_to_createEvent)
                 }
+                R.id.clear_events_button -> {
+                    viewModel.eventList.clear()
+                }
+                R.id.clear_people_button ->{
+                    viewModel.personList.clear()
+                }
             }
         }
 
         binding.personButton.setOnClickListener(myOnClickListener)
         binding.eventButton.setOnClickListener(myOnClickListener)
+        binding.clearEventsButton.setOnClickListener(myOnClickListener)
+        binding.clearPeopleButton.setOnClickListener(myOnClickListener)
 
         return rootView
     }

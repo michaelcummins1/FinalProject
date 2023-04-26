@@ -8,6 +8,7 @@
     android:background="@color/azure">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pick_person_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="15dp"
@@ -17,5 +18,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
