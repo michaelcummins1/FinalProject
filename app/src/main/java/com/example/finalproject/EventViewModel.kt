@@ -15,13 +15,14 @@ class EventViewModel : ViewModel() {
         var gifts = giftIdeas
         val giftList: MutableList<String> = mutableListOf()
         var i = 0
-        while(giftIdeas.length > 0){
+        while(i < giftIdeas.length){
             if(giftIdeas.get(i) == ',' ){
                 giftList.add(gifts.substring(0, i))
                 gifts = gifts.substring(i + 1)
             }
             i++
         }
+        giftList.add(giftIdeas)
         val temp = Person(name, giftList)
         personList.add(temp)
     }
@@ -34,6 +35,14 @@ class EventViewModel : ViewModel() {
     fun Long.toDateString(dateFormat: Int =  DateFormat.MEDIUM): String {
         val df = DateFormat.getDateInstance(dateFormat, Locale.getDefault())
         return df.format(this)
+    }
+
+    fun clearEvents(){
+        eventList.clear()
+    }
+
+    fun clearPeople(){
+        personList.clear()
     }
 
 }

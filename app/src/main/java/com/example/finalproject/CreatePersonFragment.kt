@@ -1,6 +1,7 @@
 package com.example.finalproject
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,12 +27,13 @@ class CreatePersonFragment : Fragment() {
         _binding = FragmentCreatePersonBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
-        val personName = binding.editTextName.text.toString()
-        val giftList = binding.editTextGift.text.toString()
+
 
         val myOnClickListener = View.OnClickListener { view ->
             when(view.id){
                 R.id.create_button ->{
+                    val personName = binding.editTextName.text.toString()
+                    val giftList = binding.editTextGift.text.toString()
                     viewModel.createNewPerson(personName, giftList)
                     rootView.findNavController().navigate(R.id.action_createPersonFragment_to_displayEventsFragment)
                 }
@@ -39,8 +41,6 @@ class CreatePersonFragment : Fragment() {
         }
 
         binding.createButton.setOnClickListener(myOnClickListener)
-
-        viewModel.createNewPerson(personName, giftList)
 
         return rootView
     }

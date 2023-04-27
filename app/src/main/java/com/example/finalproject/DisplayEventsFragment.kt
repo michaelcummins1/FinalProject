@@ -43,10 +43,10 @@ class DisplayEventsFragment : Fragment() {
                     rootView.findNavController().navigate(R.id.action_displayEventsFragment_to_createEvent)
                 }
                 R.id.clear_events_button -> {
-                    viewModel.eventList.clear()
+                    viewModel.clearEvents()
                 }
                 R.id.clear_people_button ->{
-                    viewModel.personList.clear()
+                    viewModel.clearPeople()
                 }
             }
         }
