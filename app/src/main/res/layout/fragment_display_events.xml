@@ -35,24 +35,24 @@
 
     <Button
         android:id="@+id/event_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="New Event"
-        app:layout_constraintEnd_toStartOf="@+id/person_button"
+        app:layout_constraintEnd_toEndOf="@+id/clear_events_button"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/clear_events_button"
         app:layout_constraintTop_toTopOf="@+id/person_button" />
 
     <Button
         android:id="@+id/person_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:text="New Person"
         app:layout_constraintBottom_toTopOf="@+id/clear_people_button"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/clear_people_button"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/event_button" />
+        app:layout_constraintStart_toStartOf="@+id/clear_people_button" />
 
     <Button
         android:id="@+id/clear_events_button"

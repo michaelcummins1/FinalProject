@@ -23,11 +23,7 @@
     <fragment
         android:id="@+id/createPersonFragment"
         android:name="com.example.finalproject.CreatePersonFragment"
-        android:label="CreatePersonFragment" >
-        <action
-            android:id="@+id/action_createPersonFragment_to_displayEventsFragment"
-            app:destination="@id/displayEventsFragment" />
-    </fragment>
+        android:label="CreatePersonFragment" />
     <fragment
         android:id="@+id/createEvent"
         android:name="com.example.finalproject.CreateEventFragment"

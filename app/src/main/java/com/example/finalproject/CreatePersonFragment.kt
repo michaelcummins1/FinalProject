@@ -35,7 +35,7 @@ class CreatePersonFragment : Fragment() {
                     val personName = binding.editTextName.text.toString()
                     val giftList = binding.editTextGift.text.toString()
                     viewModel.createNewPerson(personName, giftList)
-                    rootView.findNavController().navigate(R.id.action_createPersonFragment_to_displayEventsFragment)
+                    rootView.findNavController().navigateUp()
                 }
             }
         }
