@@ -25,7 +25,7 @@ class PickPersonFragment : Fragment() {
         _binding = FragmentPickPersonBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
-        val myAdapter = PickPersonAdapter(viewModel.personList)
+        val myAdapter = PickPersonAdapter(viewModel.personList, viewModel)
         binding.pickPersonRecycler.adapter = myAdapter
 
         return rootView

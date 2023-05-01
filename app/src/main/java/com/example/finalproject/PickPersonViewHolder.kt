@@ -1,20 +1,23 @@
 package com.example.finalproject
 
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.databinding.PickPersonItemLayoutBinding
 
-class PickPersonViewHolder(val binding: PickPersonItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-    private lateinit var currentPerson : Person
+class PickPersonViewHolder(val binding: PickPersonItemLayoutBinding, val viewModel: EventViewModel) : RecyclerView.ViewHolder(binding.root) {
+    private lateinit var currentPerson: Person
 
-    init{
-        binding.root.setOnClickListener{ view ->
-        setFragmentResultListener("PICK_PERSON_KEY")
+    init {
+        binding.root.setOnClickListener { view ->
+
         }
     }
 
-    fun bindPerson(person: Person){
-        currentPerson = person
-        binding.pickPersonName.text = currentPerson.name
-    }
+        fun bindPerson(person: Person) {
+            currentPerson = person
+            binding.pickPersonName.text = currentPerson.name
+        }
+
 }

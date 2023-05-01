@@ -18,7 +18,7 @@ class CreateEventFragment : Fragment() {
     private var _binding: FragmentCreateEventBinding? = null
     private val binding get() = _binding!!
 
-    private val peopleInEventList = MutableList<Person>()
+    private lateinit var peopleInEventList : MutableList<Person>
 
     val viewModel: EventViewModel by activityViewModels()
 
@@ -37,12 +37,9 @@ class CreateEventFragment : Fragment() {
             }
         }
 
-        setFragmentResultListener("PICK_PERSON_KEY"){ requestKey: String, bundle: Bundle ->  
-            
-        }
-
 
         binding.addPerson.setOnClickListener(myOnClickListener)
         return rootView
     }
+
 }
