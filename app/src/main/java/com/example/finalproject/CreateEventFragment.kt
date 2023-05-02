@@ -18,7 +18,7 @@ class CreateEventFragment : Fragment() {
     private var _binding: FragmentCreateEventBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var peopleInEventList : MutableList<Person>
+    val peopleInEventList : MutableList<Person> = mutableListOf()
 
     val viewModel: EventViewModel by activityViewModels()
 
@@ -34,11 +34,33 @@ class CreateEventFragment : Fragment() {
         val myOnClickListener: View.OnClickListener = View.OnClickListener { view ->
             when(view.id){
                 R.id.add_person ->  rootView.findNavController().navigate(R.id.action_createEvent_to_pickPersonFragment)
+                R.id.create_event_button ->{
+                    viewModel.createNewEvent(binding.editTextTitle.text.toString(), binding.calendarView.date, peopleInEventList)
+                }
             }
         }
 
-
         binding.addPerson.setOnClickListener(myOnClickListener)
+
+        viewModel.selectedPerson.observe(viewLifecycleOwner){
+            if(!peopleInEventList.contains(viewModel.selectedPerson.value)) {
+                peopleInEventList.add(viewModel.selectedPerson.value ?: Person("Test", listOf()))
+            }
+            else{
+                //add a toast here
+            }
+            var nameList = ""
+            for((index, person) in peopleInEventList.withIndex()){
+                if(index != peopleInEventList.size - 1){
+                    nameList += "${person.name}, "
+                }
+                else{
+                    nameList += "${person.name}"
+                }
+            }
+            binding.listPeople.text = nameList
+        }
+
         return rootView
     }
 
