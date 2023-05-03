@@ -11,7 +11,7 @@ class EventViewModel : ViewModel() {
 
     val personList: MutableList<Person> = mutableListOf()
 
-    val selectedPerson: MutableLiveData<Person> = MutableLiveData()
+    val selectedPerson: MutableLiveData<Person?> = MutableLiveData()
 
 
     fun createNewPerson(name: String, giftIdeas: String){
@@ -46,6 +46,7 @@ class EventViewModel : ViewModel() {
 
     fun clearPeople(){
         personList.clear()
+        selectedPerson.value = null
     }
 
     fun pickedPerson(person: Person){

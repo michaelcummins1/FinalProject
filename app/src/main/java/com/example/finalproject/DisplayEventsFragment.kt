@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.finalproject.databinding.FragmentCreatePersonBinding
 import com.example.finalproject.databinding.FragmentDisplayEventsBinding
@@ -40,7 +41,12 @@ class DisplayEventsFragment : Fragment() {
                     rootView.findNavController().navigate(R.id.action_displayEventsFragment_to_createPersonFragment)
                 }
                 R.id.event_button -> {
-                    rootView.findNavController().navigate(R.id.action_displayEventsFragment_to_createEvent)
+                    if(viewModel.personList.size > 0){
+                        rootView.findNavController().navigate(R.id.action_displayEventsFragment_to_createEvent)
+                    }
+                    else{
+                        Toast.makeText(activity, "Create a person first", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 R.id.clear_events_button -> {
                     viewModel.clearEvents()
@@ -55,6 +61,9 @@ class DisplayEventsFragment : Fragment() {
         binding.eventButton.setOnClickListener(myOnClickListener)
         binding.clearEventsButton.setOnClickListener(myOnClickListener)
         binding.clearPeopleButton.setOnClickListener(myOnClickListener)
+
+        val myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
+        binding.displayRecyclerView.adapter = myAdapter
 
         return rootView
     }

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.MutableLiveData
@@ -36,18 +37,20 @@ class CreateEventFragment : Fragment() {
                 R.id.add_person ->  rootView.findNavController().navigate(R.id.action_createEvent_to_pickPersonFragment)
                 R.id.create_event_button ->{
                     viewModel.createNewEvent(binding.editTextTitle.text.toString(), binding.calendarView.date, peopleInEventList)
+                    rootView.findNavController().navigateUp()
                 }
             }
         }
 
         binding.addPerson.setOnClickListener(myOnClickListener)
+        binding.createEventButton.setOnClickListener(myOnClickListener)
 
         viewModel.selectedPerson.observe(viewLifecycleOwner){
-            if(!peopleInEventList.contains(viewModel.selectedPerson.value)) {
-                peopleInEventList.add(viewModel.selectedPerson.value ?: Person("Test", listOf()))
+            if(!peopleInEventList.contains(viewModel.selectedPerson.value) && viewModel.selectedPerson.value != null) {
+                peopleInEventList.add(viewModel.selectedPerson.value ?: Person("", listOf()))
             }
-            else{
-                //add a toast here
+            else if (viewModel.selectedPerson.value != null){
+                Toast.makeText(activity, "This person is already added", Toast.LENGTH_SHORT).show()
             }
             var nameList = ""
             for((index, person) in peopleInEventList.withIndex()){
