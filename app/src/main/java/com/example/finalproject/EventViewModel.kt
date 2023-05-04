@@ -13,6 +13,8 @@ class EventViewModel : ViewModel() {
 
     val selectedPerson: MutableLiveData<Person?> = MutableLiveData()
 
+    var selectedDate: MutableLiveData<Date?> = MutableLiveData()
+
 
     fun createNewPerson(name: String, giftIdeas: String){
         var gifts = giftIdeas
@@ -30,14 +32,9 @@ class EventViewModel : ViewModel() {
         personList.add(temp)
     }
 
-    fun createNewEvent(title : String, date: Long, people: List<Person>){
-        val event = Event(title, date.toDateString(), people)
+    fun createNewEvent(title : String, date: String, people: List<Person>){
+        val event = Event(title, date, people)
         eventList.add(event)
-    }
-
-    fun Long.toDateString(dateFormat: Int =  DateFormat.MEDIUM): String {
-        val df = DateFormat.getDateInstance(dateFormat, Locale.getDefault())
-        return df.format(this)
     }
 
     fun clearEvents(){
@@ -51,6 +48,10 @@ class EventViewModel : ViewModel() {
 
     fun pickedPerson(person: Person){
         selectedPerson.value = person
+    }
+
+    fun selectedDate(date: Date){
+        selectedDate.value = date
     }
 
 }
