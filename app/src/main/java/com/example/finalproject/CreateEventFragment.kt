@@ -22,12 +22,11 @@ class CreateEventFragment : Fragment() {
     private var _binding: FragmentCreateEventBinding? = null
     private val binding get() = _binding!!
 
-    val peopleInEventList : MutableList<Person> = mutableListOf()
+    val peopleInEventList: MutableList<Person> = mutableListOf()
 
     val viewModel: EventViewModel by activityViewModels()
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,48 +36,46 @@ class CreateEventFragment : Fragment() {
 
 
         val myOnClickListener: View.OnClickListener = View.OnClickListener { view ->
-            when(view.id){
-                R.id.add_person ->  rootView.findNavController().navigate(R.id.action_createEvent_to_pickPersonFragment)
-                R.id.create_event_button ->{
-                    viewModel.createNewEvent(binding.editTextTitle.text.toString(), viewModel.selectedDate.value.toString() ?: "", peopleInEventList)
+            when (view.id) {
+                R.id.add_person -> rootView.findNavController()
+                    .navigate(R.id.action_createEvent_to_pickPersonFragment)
+                R.id.create_event_button -> {
+                    viewModel.createNewEvent(
+                        binding.editTextTitle.text.toString(),
+                        viewModel.selectedDate.value ?: "",
+                        peopleInEventList
+                    )
                     rootView.findNavController().navigateUp()
                 }
+                R.id.add_date -> rootView.findNavController()
+                    .navigate(R.id.action_createEvent_to_pickDateFragment)
             }
         }
-
-        binding.calendarView.setOnDateChangeListener(object: CalendarView.OnDateChangeListener {
-            override fun onSelectedDayChange(view: CalendarView, year: Int, month: Int, d: Int){
-                viewModel.selectedDate(Date(year, month, d))
-            }
-        })
-
-
-
+        binding.addDate.setOnClickListener(myOnClickListener)
         binding.addPerson.setOnClickListener(myOnClickListener)
         binding.createEventButton.setOnClickListener(myOnClickListener)
 
-        viewModel.selectedPerson.observe(viewLifecycleOwner){
-            if(!peopleInEventList.contains(viewModel.selectedPerson.value) && viewModel.selectedPerson.value != null) {
+        viewModel.selectedPerson.observe(viewLifecycleOwner) {
+            if (!peopleInEventList.contains(viewModel.selectedPerson.value) && viewModel.selectedPerson.value != null) {
                 peopleInEventList.add(viewModel.selectedPerson.value ?: Person("", listOf()))
-            }
-            else if (viewModel.selectedPerson.value != null){
+            } else if (viewModel.selectedPerson.value != null) {
                 Toast.makeText(activity, "This person is already added", Toast.LENGTH_SHORT).show()
             }
             var nameList = ""
-            for((index, person) in peopleInEventList.withIndex()){
-                if(index != peopleInEventList.size - 1){
+            for ((index, person) in peopleInEventList.withIndex()) {
+                if (index != peopleInEventList.size - 1) {
                     nameList += "${person.name}, "
-                }
-                else{
+                } else {
                     nameList += "${person.name}"
                 }
             }
             binding.listPeople.text = nameList
         }
 
-        viewModel.selectedDate.observe(viewLifecycleOwner){
-            binding.calendarView.date = viewModel.selectedDate.value?.date?.toLong() ?: 0
+        viewModel.selectedDate.observe(viewLifecycleOwner) {
+            binding.displayDate.text = viewModel.selectedDate.value ?: ""
         }
+
 
         return rootView
     }

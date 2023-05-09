@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_createEvent_to_pickPersonFragment"
             app:destination="@id/pickPersonFragment" />
+        <action
+            android:id="@+id/action_createEvent_to_pickDateFragment"
+            app:destination="@id/pickDateFragment" />
     </fragment>
     <fragment
         android:id="@+id/pickPersonFragment"
@@ -52,4 +55,9 @@
         android:name="com.example.finalproject.ViewPersonFragment"
         android:label="fragment_view_person"
         tools:layout="@layout/fragment_view_person" />
+    <fragment
+        android:id="@+id/pickDateFragment"
+        android:name="com.example.finalproject.PickDateFragment"
+        android:label="fragment_pick_date"
+        tools:layout="@layout/fragment_pick_date" />
 </navigation>

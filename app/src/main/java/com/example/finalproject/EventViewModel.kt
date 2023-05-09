@@ -13,7 +13,7 @@ class EventViewModel : ViewModel() {
 
     val selectedPerson: MutableLiveData<Person?> = MutableLiveData()
 
-    var selectedDate: MutableLiveData<Date?> = MutableLiveData()
+    var selectedDate: MutableLiveData<String> = MutableLiveData()
 
 
     fun createNewPerson(name: String, giftIdeas: String){
@@ -48,10 +48,6 @@ class EventViewModel : ViewModel() {
 
     fun pickedPerson(person: Person){
         selectedPerson.value = person
-    }
-
-    fun selectedDate(date: Date){
-        selectedDate.value = date
     }
 
 }

@@ -1,19 +1,19 @@
 package com.example.finalproject
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.finalproject.databinding.FragmentCreatePersonBinding
+import androidx.navigation.findNavController
 import com.example.finalproject.databinding.FragmentDisplayEventsBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 
 
 class DisplayEventsFragment : Fragment() {
@@ -49,10 +49,26 @@ class DisplayEventsFragment : Fragment() {
                     }
                 }
                 R.id.clear_events_button -> {
-                    viewModel.clearEvents()
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Confirmation:")
+                        .setMessage("Are you sure you want to clear all events?")
+                        .setPositiveButton("Yes") { dialog, which ->
+                            viewModel.clearEvents()
+                        }
+                        .setNegativeButton("No") { dialog, which ->
+                        }
+                        .show()
                 }
                 R.id.clear_people_button ->{
-                    viewModel.clearPeople()
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Confirmation:")
+                        .setMessage("Are you sure you want to clear all events?")
+                        .setPositiveButton("Yes") { dialog, which ->
+                            viewModel.clearPeople()
+                        }
+                        .setNegativeButton("No") { dialog, which ->
+                        }
+                        .show()
                 }
             }
         }
