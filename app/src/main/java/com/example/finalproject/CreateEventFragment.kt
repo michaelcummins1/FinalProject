@@ -22,10 +22,9 @@ class CreateEventFragment : Fragment() {
     private var _binding: FragmentCreateEventBinding? = null
     private val binding get() = _binding!!
 
-    val peopleInEventList: MutableList<Person> = mutableListOf()
-
     val viewModel: EventViewModel by activityViewModels()
 
+    val peopleInEventList: MutableList<Person> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,18 +33,27 @@ class CreateEventFragment : Fragment() {
         _binding = FragmentCreateEventBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
-
         val myOnClickListener: View.OnClickListener = View.OnClickListener { view ->
             when (view.id) {
                 R.id.add_person -> rootView.findNavController()
                     .navigate(R.id.action_createEvent_to_pickPersonFragment)
                 R.id.create_event_button -> {
-                    viewModel.createNewEvent(
-                        binding.editTextTitle.text.toString(),
-                        viewModel.selectedDate.value ?: "",
-                        peopleInEventList
-                    )
-                    rootView.findNavController().navigateUp()
+                    if (binding.editTextTitle.text.toString().equals("")) {
+                        Toast.makeText(activity, "Give the event a name", Toast.LENGTH_SHORT).show()
+                    } else if (viewModel.selectedDate.value.equals(null)) {
+                        Toast.makeText(activity, "Give the event a date", Toast.LENGTH_SHORT).show()
+                    } else if (peopleInEventList.size == 0) {
+                        Toast.makeText(activity, "Give the event a list of people", Toast.LENGTH_SHORT).show()
+                    } else {
+                        viewModel.createNewEvent(
+                            binding.editTextTitle.text.toString(),
+                            viewModel.selectedDate.value ?: "",
+                            peopleInEventList
+                        )
+                        viewModel.selectedDate.value = null
+                        viewModel.selectedPerson.value = null
+                        rootView.findNavController().navigateUp()
+                    }
                 }
                 R.id.add_date -> rootView.findNavController()
                     .navigate(R.id.action_createEvent_to_pickDateFragment)
@@ -75,7 +83,6 @@ class CreateEventFragment : Fragment() {
         viewModel.selectedDate.observe(viewLifecycleOwner) {
             binding.displayDate.text = viewModel.selectedDate.value ?: ""
         }
-
 
         return rootView
     }

@@ -35,6 +35,9 @@ class DisplayEventsFragment : Fragment() {
         lateinit var dbRef : DatabaseReference
         dbRef = Firebase.database.reference
 
+        val myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
+        binding.displayRecyclerView.adapter = myAdapter
+
         val myOnClickListener: View.OnClickListener = View.OnClickListener { view ->
             when(view.id){
                 R.id.person_button -> {
@@ -54,6 +57,7 @@ class DisplayEventsFragment : Fragment() {
                         .setMessage("Are you sure you want to clear all events?")
                         .setPositiveButton("Yes") { dialog, which ->
                             viewModel.clearEvents()
+                            binding.displayRecyclerView.adapter = myAdapter
                         }
                         .setNegativeButton("No") { dialog, which ->
                         }
@@ -62,7 +66,7 @@ class DisplayEventsFragment : Fragment() {
                 R.id.clear_people_button ->{
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle("Confirmation:")
-                        .setMessage("Are you sure you want to clear all events?")
+                        .setMessage("Are you sure you want to clear all people?")
                         .setPositiveButton("Yes") { dialog, which ->
                             viewModel.clearPeople()
                         }
@@ -77,9 +81,6 @@ class DisplayEventsFragment : Fragment() {
         binding.eventButton.setOnClickListener(myOnClickListener)
         binding.clearEventsButton.setOnClickListener(myOnClickListener)
         binding.clearPeopleButton.setOnClickListener(myOnClickListener)
-
-        val myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
-        binding.displayRecyclerView.adapter = myAdapter
 
         return rootView
     }

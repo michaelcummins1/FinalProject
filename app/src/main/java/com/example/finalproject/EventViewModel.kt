@@ -20,8 +20,8 @@ class EventViewModel : ViewModel() {
         var gifts = giftIdeas
         val giftList: MutableList<String> = mutableListOf()
         var i = 0
-        while(i < giftIdeas.length){
-            if(giftIdeas.get(i) == ',' ){
+        while(i < gifts.length){
+            if(gifts.get(i) == ',' ){
                 giftList.add(gifts.substring(0, i))
                 gifts = gifts.substring(i + 1)
             }
