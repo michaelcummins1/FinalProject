@@ -35,7 +35,10 @@ class PickDateFragment : Fragment() {
 
         val myOnClickListener: View.OnClickListener = View.OnClickListener { view ->
             when (view.id) {
-                R.id.confirm_date -> rootView.findNavController().navigateUp()
+                R.id.confirm_date -> {
+                    viewModel.selectedPerson.value = null
+                    rootView.findNavController().navigateUp()
+                }
             }
         }
 
