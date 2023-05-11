@@ -26,6 +26,14 @@ class ViewEventFragment : Fragment() {
         _binding = FragmentViewEventBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
+        val selectedEvent = viewModel.selectedEvent ?: Event("", "", listOf())
+
+        binding.eventName.text = selectedEvent.title
+        binding.eventDate.text = selectedEvent.date
+
+        val myAdapter = ViewEventAdapter(selectedEvent.people, viewModel)
+        binding.viewEventRecycler.adapter = myAdapter
+
         return rootView
     }
 
