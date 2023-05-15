@@ -2,6 +2,8 @@ package com.example.finalproject
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class EventViewModel : ViewModel() {
 
@@ -16,6 +18,8 @@ class EventViewModel : ViewModel() {
     var selectedDate: MutableLiveData<String> = MutableLiveData()
 
     var selectedEvent: Event? = null
+
+    val dbRef = Firebase.database.reference
 
 
     fun createNewPerson(name: String, giftIdeas: String){
@@ -33,6 +37,7 @@ class EventViewModel : ViewModel() {
         giftList.add(gifts)
         val temp = Person(name, giftList)
         personList.add(temp)
+        dbRef.child("addedPeople").push().setValue(temp)
     }
 
     fun createNewEvent(title : String, date: String, people: List<Person>){
@@ -64,15 +69,18 @@ class EventViewModel : ViewModel() {
         if(!eventList.contains(event)){
             eventList.add(event)
         }
+        dbRef.child("addedEvents").push().setValue(event)
     }
 
     fun clearEvents(){
         eventList.clear()
+        dbRef.child("addedEvents").removeValue()
     }
 
     fun clearPeople(){
         personList.clear()
         selectedPersonCreate.value = null
+        dbRef.child("addedPeople").removeValue()
     }
 
     fun pickedPerson(person: Person){
