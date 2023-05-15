@@ -52,27 +52,40 @@ class DisplayEventsFragment : Fragment() {
                     }
                 }
                 R.id.clear_events_button -> {
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Confirmation:")
-                        .setMessage("Are you sure you want to clear all events?")
-                        .setPositiveButton("Yes") { dialog, which ->
-                            viewModel.clearEvents()
-                            binding.displayRecyclerView.adapter = myAdapter
-                        }
-                        .setNegativeButton("No") { dialog, which ->
-                        }
-                        .show()
+                    if(viewModel.eventList.size == 0){
+                        Toast.makeText(activity, "There are no events to clear", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle("Confirmation:")
+                            .setMessage("Are you sure you want to clear all events?")
+                            .setPositiveButton("Yes") { dialog, which ->
+                                viewModel.clearEvents()
+                                binding.displayRecyclerView.adapter = myAdapter
+                            }
+                            .setNegativeButton("No") { dialog, which ->
+                            }
+                            .show()
+                    }
                 }
                 R.id.clear_people_button ->{
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Confirmation:")
-                        .setMessage("Are you sure you want to clear all people?")
-                        .setPositiveButton("Yes") { dialog, which ->
-                            viewModel.clearPeople()
-                        }
-                        .setNegativeButton("No") { dialog, which ->
-                        }
-                        .show()
+                    if(viewModel.personList.size == 0){
+                        Toast.makeText(activity, "There are no people to clear", Toast.LENGTH_SHORT).show()
+                    }
+                    else if(viewModel.eventList.size > 0){
+                        Toast.makeText(activity, "You must clear events before you can clear people", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle("Confirmation:")
+                            .setMessage("Are you sure you want to clear all people?")
+                            .setPositiveButton("Yes") { dialog, which ->
+                                viewModel.clearPeople()
+                            }
+                            .setNegativeButton("No") { dialog, which ->
+                            }
+                            .show()
+                    }
                 }
             }
         }

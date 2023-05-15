@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import com.example.finalproject.databinding.FragmentCreateEventBinding
 import com.example.finalproject.databinding.FragmentPickDateBinding
-import java.util.*
 
 class PickDateFragment : Fragment() {
 
@@ -36,7 +34,7 @@ class PickDateFragment : Fragment() {
         val myOnClickListener: View.OnClickListener = View.OnClickListener { view ->
             when (view.id) {
                 R.id.confirm_date -> {
-                    viewModel.selectedPerson.value = null
+                    viewModel.selectedPersonCreate.value = null
                     rootView.findNavController().navigateUp()
                 }
             }

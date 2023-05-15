@@ -1,21 +1,14 @@
 package com.example.finalproject
 
-import android.icu.text.DateFormat.getDateInstance
-import android.icu.text.SimpleDateFormat
-import android.net.ParseException
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.finalproject.databinding.FragmentCreateEventBinding
-import java.util.*
 
 class CreateEventFragment : Fragment() {
 
@@ -51,7 +44,7 @@ class CreateEventFragment : Fragment() {
                             peopleInEventList
                         )
                         viewModel.selectedDate.value = null
-                        viewModel.selectedPerson.value = null
+                        viewModel.selectedPersonCreate.value = null
                         rootView.findNavController().navigateUp()
                     }
                 }
@@ -63,10 +56,10 @@ class CreateEventFragment : Fragment() {
         binding.addPerson.setOnClickListener(myOnClickListener)
         binding.createEventButton.setOnClickListener(myOnClickListener)
 
-        viewModel.selectedPerson.observe(viewLifecycleOwner) {
-            if (!peopleInEventList.contains(viewModel.selectedPerson.value) && viewModel.selectedPerson.value != null) {
-                peopleInEventList.add(viewModel.selectedPerson.value ?: Person("", listOf()))
-            } else if (viewModel.selectedPerson.value != null) {
+        viewModel.selectedPersonCreate.observe(viewLifecycleOwner) {
+            if (!peopleInEventList.contains(viewModel.selectedPersonCreate.value) && viewModel.selectedPersonCreate.value != null) {
+                peopleInEventList.add(viewModel.selectedPersonCreate.value ?: Person("", listOf()))
+            } else if (viewModel.selectedPersonCreate.value != null) {
                 Toast.makeText(activity, "This person is already added", Toast.LENGTH_SHORT).show()
             }
             var nameList = ""

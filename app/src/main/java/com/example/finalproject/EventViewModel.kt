@@ -2,8 +2,6 @@ package com.example.finalproject
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.text.DateFormat
-import java.util.*
 
 class EventViewModel : ViewModel() {
 
@@ -11,7 +9,9 @@ class EventViewModel : ViewModel() {
 
     val personList: MutableList<Person> = mutableListOf()
 
-    val selectedPerson: MutableLiveData<Person?> = MutableLiveData()
+    val selectedPersonCreate: MutableLiveData<Person?> = MutableLiveData()
+
+    var selectedPersonDisplay: Person = Person("", listOf())
 
     var selectedDate: MutableLiveData<String> = MutableLiveData()
 
@@ -26,10 +26,11 @@ class EventViewModel : ViewModel() {
             if(gifts.get(i) == ',' ){
                 giftList.add(gifts.substring(0, i))
                 gifts = gifts.substring(i + 1)
+                i = 0
             }
             i++
         }
-        giftList.add(giftIdeas)
+        giftList.add(gifts)
         val temp = Person(name, giftList)
         personList.add(temp)
     }
@@ -71,11 +72,11 @@ class EventViewModel : ViewModel() {
 
     fun clearPeople(){
         personList.clear()
-        selectedPerson.value = null
+        selectedPersonCreate.value = null
     }
 
     fun pickedPerson(person: Person){
-        selectedPerson.value = person
+        selectedPersonCreate.value = person
     }
 
 }
