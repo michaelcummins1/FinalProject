@@ -11,7 +11,7 @@ class EventViewModel : ViewModel() {
 
     val personList: MutableList<Person> = mutableListOf()
 
-    val selectedPersonCreate: MutableLiveData<Person?> = MutableLiveData()
+    val selectedPersonCreate: MutableLiveData<Int?> = MutableLiveData()
 
     var selectedPersonDisplay: Person = Person("", listOf())
 
@@ -40,7 +40,7 @@ class EventViewModel : ViewModel() {
         dbRef.child("addedPeople").push().setValue(temp)
     }
 
-    fun createNewEvent(title : String, date: String, people: List<Person>){
+    fun createNewEvent(title : String, date: String, people: List<Int>){
         val event = Event(title, date, people)
         var i = 0
         while(i < eventList.size){
@@ -83,7 +83,7 @@ class EventViewModel : ViewModel() {
         dbRef.child("addedPeople").removeValue()
     }
 
-    fun pickedPerson(person: Person){
+    fun pickedPerson(person: Int){
         selectedPersonCreate.value = person
     }
 

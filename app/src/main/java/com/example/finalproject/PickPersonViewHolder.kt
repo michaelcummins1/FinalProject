@@ -11,7 +11,7 @@ class PickPersonViewHolder(val binding: PickPersonItemLayoutBinding, val viewMod
 
     init {
         binding.root.setOnClickListener { view ->
-            viewModel.pickedPerson(currentPerson)
+            viewModel.pickedPerson(viewModel.personList.indexOf(currentPerson))
             binding.root.findNavController().navigateUp()
         }
     }

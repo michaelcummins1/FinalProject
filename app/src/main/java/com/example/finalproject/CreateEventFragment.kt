@@ -17,7 +17,7 @@ class CreateEventFragment : Fragment() {
 
     val viewModel: EventViewModel by activityViewModels()
 
-    val peopleInEventList: MutableList<Person> = mutableListOf()
+    val peopleInEventList: MutableList<Int> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,16 +58,16 @@ class CreateEventFragment : Fragment() {
 
         viewModel.selectedPersonCreate.observe(viewLifecycleOwner) {
             if (!peopleInEventList.contains(viewModel.selectedPersonCreate.value) && viewModel.selectedPersonCreate.value != null) {
-                peopleInEventList.add(viewModel.selectedPersonCreate.value ?: Person("", listOf()))
+                peopleInEventList.add(viewModel.selectedPersonCreate.value ?: 0)
             } else if (viewModel.selectedPersonCreate.value != null) {
                 Toast.makeText(activity, "This person is already added", Toast.LENGTH_SHORT).show()
             }
             var nameList = ""
             for ((index, person) in peopleInEventList.withIndex()) {
                 if (index != peopleInEventList.size - 1) {
-                    nameList += "${person.name}, "
+                    nameList += "${viewModel.personList[person].name}, "
                 } else {
-                    nameList += "${person.name}"
+                    nameList += viewModel.personList[person].name
                 }
             }
             binding.listPeople.text = nameList

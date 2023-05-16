@@ -1,6 +1,7 @@
 package com.example.finalproject
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlin.math.sin
 
 
 class DisplayEventsFragment : Fragment() {
@@ -43,15 +45,23 @@ class DisplayEventsFragment : Fragment() {
                 for (allEventEntries in allDBEntries) {
                     for (singleEventEntry in allEventEntries.children) {
                         numOfEventsAdded++
-                        val title = singleEventEntry.child("title").getValue().toString()
-                        val date = singleEventEntry.child("date").getValue().toString()
-                        val people = singleEventEntry.child("people").getValue().toString()
+                        val name = singleEventEntry.child("addedPeople").child("name").getValue().toString()
+                        val giftIdeas= singleEventEntry.child("addedPeople").child("giftIdeas").getValue().toString()
 
 
+                        val title = singleEventEntry.child("addedEvents").child("title").getValue().toString()
+                        val date = singleEventEntry.child("addedEvents").child("date").getValue().toString()
+                        var people = singleEventEntry.child("addedEvents").child("people").getValue().toString()
+                        people = people.substring(1, people.length - 1)
+                        val peopleList : MutableList<Int> = mutableListOf()
 
-//
-//                        val currentEvent = Event(title, date, people)
-//                        viewModel.eventList.add(currentEvent)
+                        Log.d("DisplayEventsFragment", "people contains: $people")
+                        while(people.length > 0){
+//                            val num = people.substring(0, people.indexOf(",")).toInt()
+//                            peopleList.add(num)
+//                            people = people.substring(people.indexOf(","))
+                        }
+
                     }
                 }
             }
