@@ -1,5 +1,6 @@
 package com.example.finalproject
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import kotlin.math.sin
 
@@ -26,6 +28,7 @@ class DisplayEventsFragment : Fragment() {
 
     val viewModel: EventViewModel by activityViewModels()
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +36,9 @@ class DisplayEventsFragment : Fragment() {
 
         _binding = FragmentDisplayEventsBinding.inflate(inflater, container, false)
         val rootView = binding.root
+
+        val myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
+        binding.displayRecyclerView.adapter = myAdapter
 
         val dbRef = Firebase.database.reference
 
@@ -45,23 +51,54 @@ class DisplayEventsFragment : Fragment() {
                 for (allEventEntries in allDBEntries) {
                     for (singleEventEntry in allEventEntries.children) {
                         numOfEventsAdded++
-                        val name = singleEventEntry.child("addedPeople").child("name").getValue().toString()
-                        val giftIdeas= singleEventEntry.child("addedPeople").child("giftIdeas").getValue().toString()
 
+                        val nameTest = singleEventEntry.child("name").value
+                        val giftsTest = singleEventEntry.child("giftIdeas").value
 
-                        val title = singleEventEntry.child("addedEvents").child("title").getValue().toString()
-                        val date = singleEventEntry.child("addedEvents").child("date").getValue().toString()
-                        var people = singleEventEntry.child("addedEvents").child("people").getValue().toString()
-                        people = people.substring(1, people.length - 1)
-                        val peopleList : MutableList<Int> = mutableListOf()
-
-                        Log.d("DisplayEventsFragment", "people contains: $people")
-                        while(people.length > 0){
-//                            val num = people.substring(0, people.indexOf(",")).toInt()
-//                            peopleList.add(num)
-//                            people = people.substring(people.indexOf(","))
+                        if(nameTest != null && giftsTest != null){
+                            val name = singleEventEntry.child("name").value.toString()
+                            var gifts = singleEventEntry.child("giftIdeas").value.toString()
+                            gifts = gifts.substring(1, gifts.length - 1)
+                            val giftList: MutableList<String> = mutableListOf()
+                            var i = 0
+                            while(i < gifts.length){
+                                if(gifts.get(i) == ',' ){
+                                    giftList.add(gifts.substring(0, i))
+                                    gifts = gifts.substring(i + 1)
+                                    i = 0
+                                }
+                                i++
+                            }
+                            giftList.add(gifts)
+                            val tempPerson = Person(name, giftList)
+                            viewModel.personList.add(tempPerson)
                         }
 
+                        val titleTest = singleEventEntry.child("title").value
+                        val dateTest = singleEventEntry.child("date").value
+                        val peopleTest = singleEventEntry.child("people").value
+
+                        if(titleTest != null && dateTest != null && peopleTest != null){
+                            val title = singleEventEntry.child("title").value.toString()
+                            val date = singleEventEntry.child("date").value.toString()
+                            var people = singleEventEntry.child("people").value.toString()
+                            people = people.substring(1, people.length - 1)
+                            val peopleList : MutableList<Int> = mutableListOf()
+                            var j = 0
+                            while(j < people.length) {
+                                if (people.get(j) == ',') {
+                                    peopleList.add(people.substring(0, j).toInt())
+                                    people = people.substring(j + 1)
+                                    j = 0
+                                }
+                                j++
+                            }
+                            peopleList.add(people.toInt())
+                            val tempEvent = Event(title, date, peopleList)
+                            viewModel.eventList.add(tempEvent)
+
+                            myAdapter.notifyDataSetChanged()
+                        }
                     }
                 }
             }
@@ -70,8 +107,7 @@ class DisplayEventsFragment : Fragment() {
             }
         })
 
-        val myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
-        binding.displayRecyclerView.adapter = myAdapter
+
 
         val myOnClickListener: View.OnClickListener = View.OnClickListener { view ->
             when (view.id) {
