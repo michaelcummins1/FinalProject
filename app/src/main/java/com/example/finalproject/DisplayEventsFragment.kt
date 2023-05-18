@@ -30,7 +30,6 @@ class DisplayEventsFragment : Fragment() {
 
     val viewModel: EventViewModel by activityViewModels()
 
-    lateinit var myAdapter: DisplayFragmentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +39,7 @@ class DisplayEventsFragment : Fragment() {
         _binding = FragmentDisplayEventsBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
-        myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
+        val myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
         binding.displayRecyclerView.adapter = myAdapter
 
 
@@ -106,75 +105,73 @@ class DisplayEventsFragment : Fragment() {
         binding.clearEventsButton.setOnClickListener(myOnClickListener)
         binding.clearPeopleButton.setOnClickListener(myOnClickListener)
 
+        val dbRef = Firebase.database.reference
 
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val allDBEntries = dataSnapshot.children
+                for (allEventEntries in allDBEntries) {
+                    for (singleEventEntry in allEventEntries.children) {
+
+                        val nameTest = singleEventEntry.child("name").value
+                        val giftsTest = singleEventEntry.child("giftIdeas").value
+
+                        if(nameTest != null && giftsTest != null){
+                            val name = singleEventEntry.child("name").value.toString()
+                            var gifts = singleEventEntry.child("giftIdeas").value.toString()
+                            gifts = gifts.substring(1, gifts.length - 1)
+                            val giftList: MutableList<String> = mutableListOf()
+                            var i = 0
+                            while(i < gifts.length){
+                                if(gifts.get(i) == ',' ){
+                                    giftList.add(gifts.substring(0, i))
+                                    gifts = gifts.substring(i + 1)
+                                    i = 0
+                                }
+                                i++
+                            }
+                            giftList.add(gifts)
+                            val tempPerson = Person(name, giftList)
+                            if(!viewModel.personList.contains(tempPerson)){
+                                viewModel.personList.add(tempPerson)
+                            }
+                        }
+
+                        val titleTest = singleEventEntry.child("title").value
+                        val dateTest = singleEventEntry.child("date").value
+                        val peopleTest = singleEventEntry.child("people").value
+
+                        if(titleTest != null && dateTest != null && peopleTest != null){
+                            val title = singleEventEntry.child("title").value.toString()
+                            val date = singleEventEntry.child("date").value.toString()
+                            var people = singleEventEntry.child("people").value.toString()
+                            people = people.substring(1, people.length - 1)
+                            val peopleList : MutableList<Int> = mutableListOf()
+                            var j = 0
+                            while(j < people.length) {
+                                if (people.get(j) == ',') {
+                                    peopleList.add(people.substring(0, j).toInt())
+                                    people = people.substring(j + 2)
+                                    j = 0
+                                }
+                                j++
+                            }
+                            peopleList.add(people.toInt())
+                            val tempEvent = Event(title, date, peopleList)
+                            if(!viewModel.eventList.contains(tempEvent)){
+                                viewModel.eventList.add(tempEvent)
+                                viewModel.sortEvents()
+                            }
+                        }
+                        myAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
 
         return rootView
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//
-//        val dbRef = Firebase.database.reference
-//
-//        dbRef.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val allDBEntries = dataSnapshot.children
-//                for (allEventEntries in allDBEntries) {
-//                    for (singleEventEntry in allEventEntries.children) {
-//
-//
-//                        val nameTest = singleEventEntry.child("name").value
-//                        val giftsTest = singleEventEntry.child("giftIdeas").value
-//
-//                        if(nameTest != null && giftsTest != null){
-//                            val name = singleEventEntry.child("name").value.toString()
-//                            var gifts = singleEventEntry.child("giftIdeas").value.toString()
-//                            gifts = gifts.substring(1, gifts.length - 1)
-//                            val giftList: MutableList<String> = mutableListOf()
-//                            var i = 0
-//                            while(i < gifts.length){
-//                                if(gifts.get(i) == ',' ){
-//                                    giftList.add(gifts.substring(0, i))
-//                                    gifts = gifts.substring(i + 1)
-//                                    i = 0
-//                                }
-//                                i++
-//                            }
-//                            giftList.add(gifts)
-//                            val tempPerson = Person(name, giftList)
-//                            viewModel.personList.add(tempPerson)
-//                        }
-//
-//                        val titleTest = singleEventEntry.child("title").value
-//                        val dateTest = singleEventEntry.child("date").value
-//                        val peopleTest = singleEventEntry.child("people").value
-//
-//                        if(titleTest != null && dateTest != null && peopleTest != null){
-//                            val title = singleEventEntry.child("title").value.toString()
-//                            val date = singleEventEntry.child("date").value.toString()
-//                            var people = singleEventEntry.child("people").value.toString()
-//                            people = people.substring(1, people.length - 1)
-//                            val peopleList : MutableList<Int> = mutableListOf()
-//                            var j = 0
-//                            while(j < people.length) {
-//                                if (people.get(j) == ',') {
-//                                    peopleList.add(people.substring(0, j).toInt())
-//                                    people = people.substring(j + 1)
-//                                    j = 0
-//                                }
-//                                j++
-//                            }
-//                            peopleList.add(people.toInt())
-//                            val tempEvent = Event(title, date, peopleList)
-//                            viewModel.eventList.add(tempEvent)
-//                        }
-//                        myAdapter.notifyDataSetChanged()
-//                    }
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//            }
-//        })
     }
 }
