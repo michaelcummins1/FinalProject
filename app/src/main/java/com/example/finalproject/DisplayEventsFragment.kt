@@ -30,7 +30,10 @@ class DisplayEventsFragment : Fragment() {
 
     val viewModel: EventViewModel by activityViewModels()
 
+    lateinit var myAdapter: DisplayFragmentAdapter
 
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +42,7 @@ class DisplayEventsFragment : Fragment() {
         _binding = FragmentDisplayEventsBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
-        val myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
+        myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
         binding.displayRecyclerView.adapter = myAdapter
 
 
@@ -108,6 +111,7 @@ class DisplayEventsFragment : Fragment() {
         val dbRef = Firebase.database.reference
 
         dbRef.addValueEventListener(object : ValueEventListener {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val allDBEntries = dataSnapshot.children
                 for (allEventEntries in allDBEntries) {
@@ -163,7 +167,8 @@ class DisplayEventsFragment : Fragment() {
                                 viewModel.sortEvents()
                             }
                         }
-                        myAdapter.notifyDataSetChanged()
+                        myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
+                        binding.displayRecyclerView.adapter = myAdapter
                     }
                 }
             }
