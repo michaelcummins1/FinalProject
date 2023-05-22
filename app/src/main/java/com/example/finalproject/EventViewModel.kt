@@ -40,7 +40,7 @@ class EventViewModel : ViewModel() {
         dbRef.child("addedPeople").push().setValue(temp)
     }
 
-    fun createNewEvent(title: String, date: String, people: List<Int>) {
+    fun createNewEvent(title: String, date: String, people: MutableList<Int>) {
         val event = Event(title, date, people)
         eventList.value?.add(event)
         sortEvents()
@@ -98,6 +98,15 @@ class EventViewModel : ViewModel() {
 
     fun deleteEvent(event : Event){
         eventList.value!!.remove(event)
+        dbRef.child("addedEvents").removeValue()
+        for(event in eventList.value!!){
+            dbRef.child("addedEvents").push().setValue(event)
+        }
+    }
+
+    fun deletePersonFromEvent(person : Person, event: Event){
+        val personNum = personList.indexOf(person)
+        event.people.remove(personNum)
         dbRef.child("addedEvents").removeValue()
         for(event in eventList.value!!){
             dbRef.child("addedEvents").push().setValue(event)

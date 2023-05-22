@@ -31,4 +31,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_event_name" />
+
+    <ImageButton
+        android:id="@+id/trash_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:background="@color/azure"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_delete_35"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

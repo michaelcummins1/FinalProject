@@ -27,12 +27,12 @@ class ViewEventFragment : Fragment() {
         _binding = FragmentViewEventBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
-        val selectedEvent = viewModel.selectedEvent ?: Event("", "", listOf())
+        val selectedEvent = viewModel.selectedEvent ?: Event("", "", mutableListOf())
 
         binding.eventName.text = selectedEvent.title
         binding.eventDate.text = selectedEvent.date
 
-        val myAdapter = ViewEventAdapter(selectedEvent.people, viewModel)
+        val myAdapter = ViewEventAdapter(selectedEvent.people, viewModel, selectedEvent)
         binding.viewEventRecycler.adapter = myAdapter
 
         binding.goBackButton1.setOnClickListener{

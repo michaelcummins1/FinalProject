@@ -11,7 +11,7 @@ class DisplayEventViewHolder(val binding: DisplayEventItemLayoutBinding, val vie
     private lateinit var currentEvent : Event
 
     init {
-        binding.viewButton.setOnClickListener { view ->
+        binding.root.setOnClickListener { view ->
             viewModel.selectedEvent = currentEvent
             binding.root.findNavController().navigate(R.id.action_displayEventsFragment_to_viewEventFragment)
         }
