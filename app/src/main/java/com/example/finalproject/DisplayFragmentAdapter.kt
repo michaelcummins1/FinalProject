@@ -10,7 +10,7 @@ class DisplayFragmentAdapter(val eventList: List<Event>, val viewModel: EventVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayEventViewHolder {
         val binding = DisplayEventItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return DisplayEventViewHolder(binding, viewModel)
+        return DisplayEventViewHolder(binding, viewModel, this)
     }
 
     override fun onBindViewHolder(holder: DisplayEventViewHolder, position: Int) {

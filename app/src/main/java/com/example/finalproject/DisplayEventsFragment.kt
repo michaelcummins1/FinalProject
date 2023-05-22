@@ -42,10 +42,12 @@ class DisplayEventsFragment : Fragment() {
         _binding = FragmentDisplayEventsBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
-        myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
+        myAdapter = DisplayFragmentAdapter(listOf(), viewModel)
         binding.displayRecyclerView.adapter = myAdapter
 
-
+        viewModel.eventList.observe(viewLifecycleOwner){
+           myAdapter.notifyDataSetChanged()
+        }
 
         val myOnClickListener: View.OnClickListener = View.OnClickListener { view ->
             when (view.id) {
@@ -62,7 +64,7 @@ class DisplayEventsFragment : Fragment() {
                     }
                 }
                 R.id.clear_events_button -> {
-                    if (viewModel.eventList.size == 0) {
+                    if (viewModel.eventList.value!!.size == 0) {
                         Toast.makeText(activity, "There are no events to clear", Toast.LENGTH_SHORT)
                             .show()
                     } else {
@@ -82,7 +84,7 @@ class DisplayEventsFragment : Fragment() {
                     if (viewModel.personList.size == 0) {
                         Toast.makeText(activity, "There are no people to clear", Toast.LENGTH_SHORT)
                             .show()
-                    } else if (viewModel.eventList.size > 0) {
+                    } else if (viewModel.eventList.value!!.size > 0) {
                         Toast.makeText(
                             activity,
                             "You must clear events before you can clear people",
@@ -162,12 +164,12 @@ class DisplayEventsFragment : Fragment() {
                             }
                             peopleList.add(people.toInt())
                             val tempEvent = Event(title, date, peopleList)
-                            if(!viewModel.eventList.contains(tempEvent)){
-                                viewModel.eventList.add(tempEvent)
+                            if(!viewModel.eventList.value!!.contains(tempEvent)){
+                                viewModel.eventList.value!!.add(tempEvent)
                                 viewModel.sortEvents()
                             }
                         }
-                        myAdapter = DisplayFragmentAdapter(viewModel.eventList, viewModel)
+                        myAdapter = DisplayFragmentAdapter(viewModel.eventList.value!!, viewModel)
                         binding.displayRecyclerView.adapter = myAdapter
                     }
                 }

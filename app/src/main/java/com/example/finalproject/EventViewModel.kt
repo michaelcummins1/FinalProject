@@ -7,7 +7,7 @@ import com.google.firebase.ktx.Firebase
 
 class EventViewModel : ViewModel() {
 
-    var eventList: MutableList<Event> = mutableListOf()
+    var eventList: MutableLiveData<MutableList<Event>> = MutableLiveData(mutableListOf())
 
     val personList: MutableList<Person> = mutableListOf()
 
@@ -42,13 +42,13 @@ class EventViewModel : ViewModel() {
 
     fun createNewEvent(title: String, date: String, people: List<Int>) {
         val event = Event(title, date, people)
-        eventList.add(event)
+        eventList.value?.add(event)
         sortEvents()
         dbRef.child("addedEvents").push().setValue(event)
     }
 
     fun clearEvents() {
-        eventList.clear()
+        eventList.value?.clear()
         dbRef.child("addedEvents").removeValue()
     }
 
@@ -65,35 +65,43 @@ class EventViewModel : ViewModel() {
     fun sortEvents() {
         val newEventList: MutableList<Event> = mutableListOf()
 
-        while (eventList.size > 0) {
-            var smallestEvent = eventList[0]
+        while (eventList.value?.size!! > 0) {
+            var smallestEvent = eventList.value!![0]
             var i = 1
-            while (i < eventList.size) {
+            while (i < eventList.value!!.size) {
 
                 val possibleYear = smallestEvent.date.substring(smallestEvent.date.length - 4).toInt()
                 val possibleDay = smallestEvent.date.substring(smallestEvent.date.indexOf("/") + 1, smallestEvent.date.lastIndexOf("/")).toInt()
                 val possibleMonth = smallestEvent.date.substring(0, smallestEvent.date.indexOf("/")).toInt()
 
-                val compareYear = eventList[i].date.substring(eventList[i].date.length - 4).toInt()
-                val compareDay = eventList[i].date.substring(eventList[i].date.indexOf("/") + 1, eventList[i].date.lastIndexOf("/")).toInt()
-                val compareMonth = eventList[i].date.substring(0, eventList[i].date.indexOf("/")).toInt()
+                val compareYear = eventList.value!![i].date.substring(eventList.value!![i].date.length - 4).toInt()
+                val compareDay = eventList.value!![i].date.substring(eventList.value!![i].date.indexOf("/") + 1, eventList.value!![i].date.lastIndexOf("/")).toInt()
+                val compareMonth = eventList.value!![i].date.substring(0, eventList.value!![i].date.indexOf("/")).toInt()
 
                 if (compareYear < possibleYear) {
-                    smallestEvent = eventList[i]
+                    smallestEvent = eventList.value!![i]
                 }
                 else if (compareYear == possibleYear && compareMonth < possibleMonth) {
-                    smallestEvent = eventList[i]
+                    smallestEvent = eventList.value!![i]
                 }
                 else if (compareYear == possibleYear && compareMonth == possibleMonth && compareDay < possibleDay) {
-                    smallestEvent = eventList[i]
+                    smallestEvent = eventList.value!![i]
                 }
                 i++
             }
             newEventList.add(smallestEvent)
-            eventList.remove(smallestEvent)
+            eventList.value!!.remove(smallestEvent)
         }
 
-        eventList = newEventList
+        eventList.value = newEventList
+    }
+
+    fun deleteEvent(event : Event){
+        eventList.value!!.remove(event)
+        dbRef.child("addedEvents").removeValue()
+        for(event in eventList.value!!){
+            dbRef.child("addedEvents").push().setValue(event)
+        }
     }
 
 }
