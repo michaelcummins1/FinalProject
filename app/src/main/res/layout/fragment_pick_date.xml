@@ -11,8 +11,8 @@
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="0dp"
-        android:layout_height="550dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="75dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/confirm_date"
         app:layout_constraintEnd_toEndOf="parent"
