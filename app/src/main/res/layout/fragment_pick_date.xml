@@ -28,6 +28,7 @@
         android:textColor="@color/navy"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:fontFamily="@font/audiowide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:text="Confirm Date"
+        app:fontFamily="@font/audiowide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -18,6 +18,7 @@
         android:textColor="@color/navy"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:fontFamily="@font/audiowide"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,6 +31,7 @@
         android:text="Date:"
         android:textColor="@color/navy"
         android:textSize="30sp"
+        app:fontFamily="@font/audiowide"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
 
@@ -42,6 +44,7 @@
         android:text="People:"
         android:textColor="@color/navy"
         android:textSize="30sp"
+        app:fontFamily="@font/audiowide"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_date" />
 
@@ -52,6 +55,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
+        app:fontFamily="@font/audiowide"
         android:layout_marginBottom="15dp"
         android:textColor="@color/navy"
         android:textSize="25sp"
@@ -67,6 +71,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginBottom="15dp"
         android:text="+ Person"
+        app:fontFamily="@font/audiowide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/create_event_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -79,6 +84,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:text="Create"
+        app:fontFamily="@font/audiowide"
         app:layout_constraintBottom_toBottomOf="@+id/add_person"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -93,6 +99,7 @@
         android:text="Title:"
         android:textColor="@color/navy"
         android:textSize="30sp"
+        app:fontFamily="@font/audiowide"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_event"
         app:layout_constraintVertical_chainStyle="spread_inside" />
@@ -104,6 +111,7 @@
         android:layout_marginStart="10dp"
         android:ems="10"
         android:hint="Title of Event"
+        app:fontFamily="@font/audiowide"
         android:inputType="textPersonName"
         android:textColor="@color/navy"
         android:textColorHint="@color/blue"
@@ -118,6 +126,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="15dp"
         android:textColor="@color/navy"
+        app:fontFamily="@font/audiowide"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/name_textView"
@@ -129,6 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        app:fontFamily="@font/audiowide"
         android:text="+ Date"
         app:layout_constraintStart_toStartOf="@+id/name_textView"
         app:layout_constraintTop_toBottomOf="@+id/name_textView" />

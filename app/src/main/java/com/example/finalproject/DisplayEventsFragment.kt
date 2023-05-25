@@ -131,7 +131,7 @@ class DisplayEventsFragment : Fragment() {
                             while(i < gifts.length){
                                 if(gifts.get(i) == ',' ){
                                     giftList.add(gifts.substring(0, i))
-                                    gifts = gifts.substring(i + 1)
+                                    gifts = gifts.substring(i + 2)
                                     i = 0
                                 }
                                 i++
