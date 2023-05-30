@@ -2,6 +2,7 @@ package com.example.finalproject
 
 import ViewPersonAdapter
 import android.annotation.SuppressLint
+import android.content.Context
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentActivity
@@ -18,26 +19,21 @@ class ViewPersonViewHolder(
     val binding2: FragmentViewPersonBinding,
     val viewModel: EventViewModel,
     val adapter: ViewPersonAdapter,
-    val activity: FragmentActivity?
+    val activity: FragmentActivity?,
+    val context: Context
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private lateinit var currentGift: String
 
     init {
         binding.imageButton.setOnClickListener { view ->
-            viewModel.deleteGiftFromPerson(currentGift)
-            adapter.notifyDataSetChanged()
-//            if (viewModel.selectedPersonDisplay.giftIdeas.size == 0) {
-//                MaterialAlertDialogBuilder(requireContext())
-//                    .setTitle("No remaining gifts")
-//                    .setMessage("Would you like to delete the person?")
-//                    .setPositiveButton("Yes") { dialog, which ->
-//
-//                    }
-//                    .setNegativeButton("No") { dialog, which ->
-//                    }
-//                 .show()
-//            }
+            if (viewModel.selectedPersonDisplay.giftIdeas.size == 1) {
+                Toast.makeText(activity, "You cannot delete all the gift ideas from a person", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                viewModel.deleteGiftFromPerson(currentGift)
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 

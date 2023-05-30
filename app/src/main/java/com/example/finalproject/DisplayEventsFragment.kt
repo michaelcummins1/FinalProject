@@ -1,6 +1,7 @@
 package com.example.finalproject
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,6 +32,8 @@ class DisplayEventsFragment : Fragment() {
     val viewModel: EventViewModel by activityViewModels()
 
     lateinit var myAdapter: DisplayFragmentAdapter
+
+
 
 
     @SuppressLint("NotifyDataSetChanged")

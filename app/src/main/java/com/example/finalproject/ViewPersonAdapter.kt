@@ -1,3 +1,4 @@
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
@@ -14,12 +15,13 @@ class ViewPersonAdapter(
     val giftList: List<String>,
     val binding2: FragmentViewPersonBinding,
     val viewModel: EventViewModel,
-    val activity: FragmentActivity?
+    val activity: FragmentActivity?,
+    val context: Context
 ) : RecyclerView.Adapter<ViewPersonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPersonViewHolder {
         val binding =
             ViewPersonItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewPersonViewHolder(binding, binding2, viewModel, this, activity)
+        return ViewPersonViewHolder(binding, binding2, viewModel, this, activity, context)
     }
 
     override fun onBindViewHolder(holder: ViewPersonViewHolder, position: Int) {
