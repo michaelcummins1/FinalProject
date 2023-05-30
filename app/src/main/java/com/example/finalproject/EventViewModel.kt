@@ -13,7 +13,7 @@ class EventViewModel : ViewModel() {
 
     val selectedPersonCreate: MutableLiveData<Int?> = MutableLiveData()
 
-    var selectedPersonDisplay: Person = Person("", listOf())
+    var selectedPersonDisplay: Person = Person("", mutableListOf())
 
     var selectedDate: MutableLiveData<String> = MutableLiveData()
 
@@ -113,4 +113,13 @@ class EventViewModel : ViewModel() {
         }
     }
 
+    fun deleteGiftFromPerson(gift: String){
+        val indexOfPerson = personList.indexOf(selectedPersonDisplay)
+        selectedPersonDisplay.giftIdeas.remove(gift)
+        personList[indexOfPerson] = selectedPersonDisplay
+        dbRef.child("addedPeople").removeValue()
+        for(person in personList){
+            dbRef.child("addedPeople").push().setValue(person)
+        }
+    }
 }

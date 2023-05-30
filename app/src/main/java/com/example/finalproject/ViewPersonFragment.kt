@@ -32,7 +32,7 @@ class ViewPersonFragment : Fragment() {
 
         binding.name.text = viewModel.selectedPersonDisplay.name
 
-        val myAdapter = ViewPersonAdapter(viewModel.selectedPersonDisplay.giftIdeas, viewModel)
+        val myAdapter = ViewPersonAdapter(viewModel.selectedPersonDisplay.giftIdeas, binding, viewModel, activity)
         binding.viewPersonRecycler.adapter = myAdapter
 
         return rootView
