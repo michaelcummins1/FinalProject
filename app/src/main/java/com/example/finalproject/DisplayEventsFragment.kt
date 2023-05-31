@@ -1,7 +1,9 @@
 package com.example.finalproject
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -105,6 +107,7 @@ class DisplayEventsFragment : Fragment() {
                             .show()
                     }
                 }
+                R.id.ideas_button -> openWebPage("https://www.goodhousekeeping.com/holidays/gift-ideas/g43163293/most-popular-gifts-2023/")
             }
         }
 
@@ -112,6 +115,7 @@ class DisplayEventsFragment : Fragment() {
         binding.eventButton.setOnClickListener(myOnClickListener)
         binding.clearEventsButton.setOnClickListener(myOnClickListener)
         binding.clearPeopleButton.setOnClickListener(myOnClickListener)
+        binding.ideasButton.setOnClickListener(myOnClickListener)
 
         val dbRef = Firebase.database.reference
 
@@ -183,5 +187,11 @@ class DisplayEventsFragment : Fragment() {
         })
 
         return rootView
+    }
+
+    fun openWebPage(url: String) {
+        val webpage: Uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, webpage)
+        startActivity(intent)
     }
 }

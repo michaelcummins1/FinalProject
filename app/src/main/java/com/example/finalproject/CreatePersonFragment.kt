@@ -1,5 +1,7 @@
 package com.example.finalproject
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -46,12 +48,20 @@ class CreatePersonFragment : Fragment() {
                         rootView.findNavController().navigateUp()
                     }
                 }
+                R.id.ideas_button2 -> openWebPage("https://www.goodhousekeeping.com/holidays/gift-ideas/g43163293/most-popular-gifts-2023/")
             }
         }
 
         binding.createButton.setOnClickListener(myOnClickListener)
+        binding.ideasButton2.setOnClickListener(myOnClickListener)
 
         return rootView
+    }
+
+    fun openWebPage(url: String) {
+        val webpage: Uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, webpage)
+        startActivity(intent)
     }
 
 }

@@ -109,4 +109,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextGift" />
+
+    <Button
+        android:id="@+id/ideas_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gift Ideas?"
+        app:fontFamily="@font/audiowide"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
