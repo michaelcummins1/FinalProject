@@ -9,6 +9,7 @@ import com.example.finalproject.databinding.FragmentCreatePersonBinding
 import com.example.finalproject.databinding.FragmentDisplayEventsBinding
 import com.example.finalproject.databinding.FragmentPickPersonBinding
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 
 
 class PickPersonFragment : Fragment() {
@@ -24,6 +25,10 @@ class PickPersonFragment : Fragment() {
     ): View? {
         _binding = FragmentPickPersonBinding.inflate(inflater, container, false)
         val rootView = binding.root
+
+        binding.goBackButton5.setOnClickListener{view ->
+            rootView.findNavController().navigateUp()
+        }
 
         val myAdapter = PickPersonAdapter(viewModel.personList, viewModel)
         binding.pickPersonRecycler.adapter = myAdapter

@@ -37,10 +37,15 @@ class PickDateFragment : Fragment() {
                     viewModel.selectedPersonCreate.value = null
                     rootView.findNavController().navigateUp()
                 }
+                R.id.go_back_button_6 -> {
+                    viewModel.selectedDate.value = null
+                    rootView.findNavController().navigateUp()
+                }
             }
         }
 
         binding.confirmDate.setOnClickListener(myOnClickListener)
+        binding.goBackButton6.setOnClickListener(myOnClickListener )
 
 
         return rootView

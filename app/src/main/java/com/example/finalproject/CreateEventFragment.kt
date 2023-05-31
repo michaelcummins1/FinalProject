@@ -50,11 +50,21 @@ class CreateEventFragment : Fragment() {
                 }
                 R.id.add_date -> rootView.findNavController()
                     .navigate(R.id.action_createEvent_to_pickDateFragment)
+
+                R.id.go_back_button_3 -> {
+                    binding.displayDate.text = ""
+                    viewModel.selectedDate.value = null
+                    peopleInEventList.clear()
+                    binding.listPeople.text = ""
+                    viewModel.selectedPersonCreate.value = null
+                    rootView.findNavController().navigateUp()
+                }
             }
         }
         binding.addDate.setOnClickListener(myOnClickListener)
         binding.addPerson.setOnClickListener(myOnClickListener)
         binding.createEventButton.setOnClickListener(myOnClickListener)
+        binding.goBackButton3.setOnClickListener(myOnClickListener)
 
         viewModel.selectedPersonCreate.observe(viewLifecycleOwner) {
             if (!peopleInEventList.contains(viewModel.selectedPersonCreate.value) && viewModel.selectedPersonCreate.value != null) {

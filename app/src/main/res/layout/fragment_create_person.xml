@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateEventFragment"
-    android:background="@color/azure">
+    android:background="@color/azure"
+    tools:context=".CreateEventFragment">
 
 
     <TextView
@@ -112,12 +112,30 @@
 
     <Button
         android:id="@+id/ideas_button2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
         android:text="Gift Ideas?"
         app:fontFamily="@font/audiowide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/go_back_button_4"
+        app:layout_constraintTop_toBottomOf="@+id/create_button"
+        app:layout_constraintVertical_bias="0.504" />
+
+    <Button
+        android:id="@+id/go_back_button_4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="Go back"
+        app:fontFamily="@font/audiowide"
+        app:layout_constraintBottom_toBottomOf="@+id/ideas_button2"
+        app:layout_constraintEnd_toStartOf="@+id/ideas_button2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_button" />
+        app:layout_constraintTop_toTopOf="@+id/ideas_button2"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

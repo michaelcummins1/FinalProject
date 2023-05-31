@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PickDateFragment"
-    android:background="@color/azure">
+    android:background="@color/azure"
+    tools:context=".PickDateFragment">
 
 
     <CalendarView
@@ -35,12 +35,29 @@
 
     <Button
         android:id="@+id/confirm_date"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="50dp"
         android:text="Confirm Date"
         app:fontFamily="@font/audiowide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/go_back_button_6" />
+
+    <Button
+        android:id="@+id/go_back_button_6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="Go back"
+        app:fontFamily="@font/audiowide"
+        app:layout_constraintBottom_toBottomOf="@+id/confirm_date"
+        app:layout_constraintEnd_toStartOf="@+id/confirm_date"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/confirm_date" />
 </androidx.constraintlayout.widget.ConstraintLayout>
